@@ -4,7 +4,9 @@
  *
  * @format
  */
-
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+//import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -15,12 +17,12 @@ import {
   Text,
   useColorScheme,
   View,
+  TouchableHighlight,
 } from 'react-native';
 
 import {
   Colors,
   DebugInstructions,
-  Header,
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
@@ -29,6 +31,7 @@ type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
+//const Stack = createStackNavigator();
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
@@ -52,6 +55,18 @@ function Section({children, title}: SectionProps): JSX.Element {
         ]}>
         {children}
       </Text>
+      <View style={[styles.container, {flexDirection: 'row'}]}>
+        <TouchableHighlight underlayColor="#FF1694">
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>A touch</Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight underlayColor="#FF1694">
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>A touch</Text>
+          </View>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 }
@@ -64,36 +79,37 @@ function App(): JSX.Element {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step Dick">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={backgroundStyle}>
+          <View
+            style={{
+              backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            }}>
+            <Section title="Step Dick">
+              Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="See Your Changes">
+              <ReloadInstructions />
+            </Section>
+            <Section title="Debug">
+              <DebugInstructions />
+            </Section>
+            <Section title="Learn More">
+              Read the docs to discover what to do next:
+            </Section>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
@@ -113,6 +129,21 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  container: {
+    paddingTop: 60,
+    alignItems: 'center',
+  },
+  button: {
+    marginBottom: 30,
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#2196F3',
+  },
+  buttonText: {
+    textAlign: 'center',
+    padding: 20,
+    color: 'white',
   },
 });
 
