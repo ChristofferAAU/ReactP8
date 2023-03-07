@@ -20,56 +20,26 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-//const Stack = createStackNavigator();
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function Boxbutton(): JSX.Element {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text>{'And my dick'}</Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-      <View style={[styles.container, {flexDirection: 'row'}]}>
-        <TouchableHighlight underlayColor="#FF1694">
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>A touch</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight underlayColor="#FF1694">
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>A touch</Text>
-          </View>
-        </TouchableHighlight>
+    <TouchableHighlight style={styles.container} underlayColor="#FF1694">
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>A touch</Text>
       </View>
+    </TouchableHighlight>
+  );
+}
+function Childbox({children}): JSX.Element {
+  return (
+    <View style={[styles.container, {flexDirection: 'row'}]}>
+      {children}
+      {children}
     </View>
   );
 }
+//const Stack = createStackNavigator();
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -85,27 +55,17 @@ function App(): JSX.Element {
           barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
         />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
+        <ScrollView style={backgroundStyle}>
           <View
             style={{
               backgroundColor: isDarkMode ? Colors.black : Colors.white,
             }}>
-            <Section title="Step Dick">
-              Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-              screen and then come back to see your edits.
-            </Section>
-            <Section title="See Your Changes">
-              <ReloadInstructions />
-            </Section>
-            <Section title="Debug">
-              <DebugInstructions />
-            </Section>
-            <Section title="Learn More">
-              Read the docs to discover what to do next:
-            </Section>
-            <LearnMoreLinks />
+            <Childbox>
+              <Boxbutton />
+            </Childbox>
+            <Childbox>
+              <Boxbutton />
+            </Childbox>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -114,10 +74,6 @@ function App(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
@@ -131,11 +87,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   container: {
-    paddingTop: 60,
-    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'space-evenly',
   },
   button: {
-    marginBottom: 30,
+    margin: 5,
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#2196F3',
