@@ -6,9 +6,8 @@
  */
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -26,9 +25,11 @@ type TouchableProps = {
   ButtonText: string;
 };
 
+const Tab = createBottomTabNavigator();
+
 function Boxbutton(props: TouchableProps): JSX.Element {
   return (
-    <TouchableHighlight style={styles.container} underlayColor="#FF1694">
+    <TouchableHighlight style={styles.touchablesimp} underlayColor="#FF1694">
       <View style={styles.button}>
         <Text style={styles.buttonText}>{props.ButtonText}</Text>
       </View>
@@ -37,14 +38,20 @@ function Boxbutton(props: TouchableProps): JSX.Element {
 }
 function Childbox(props): JSX.Element {
   return (
-    <View style={[styles.container, {flexDirection: 'row'}]}>
+    <View style={[styles.containerrow]}>
       {props.left}
       {props.right}
     </View>
   );
 }
 
-const Stack = createNativeStackNavigator();
+function Devices(): JSX.Element {
+  return (
+    <View>
+      <Text>Devices Screen</Text>
+    </View>
+  );
+}
 
 function Homecomp(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -79,27 +86,26 @@ function Homecomp(): JSX.Element {
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Homecomp} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name={'Home'} component={Homecomp} />
+        <Tab.Screen name={'Devices'} component={Devices} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  containerrow: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    flexDirection: 'row',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  containercol: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    flexDirection: 'column',
   },
-  highlight: {
-    fontWeight: '700',
-  },
-  container: {
+  touchablesimp: {
     flex: 1,
     justifyContent: 'space-evenly',
   },
