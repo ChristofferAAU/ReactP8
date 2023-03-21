@@ -8,89 +8,34 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  TouchableHighlight,
-} from 'react-native';
+import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-type TouchableProps = {
-  ButtonText: string;
-};
+//Components added from internal
+import Devices from './Components/DeviceScreen';
+import Home from './Components/HomeScreen';
 
 const Tab = createBottomTabNavigator();
 
-function Boxbutton(props: TouchableProps): JSX.Element {
-  return (
-    <TouchableHighlight style={styles.touchablesimp} underlayColor="#FF1694">
-      <View style={styles.button}>
-        <Text style={styles.buttonText}>{props.ButtonText}</Text>
-      </View>
-    </TouchableHighlight>
-  );
-}
-function Childbox(props): JSX.Element {
-  return (
-    <View style={[styles.containerrow]}>
-      {props.left}
-      {props.right}
-    </View>
-  );
-}
-
-function Devices(): JSX.Element {
-  return (
-    <View>
-      <Text>Devices Screen</Text>
-    </View>
-  );
-}
-
-function Homecomp(): JSX.Element {
+function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Childbox
-            left={<Boxbutton ButtonText="Hello" />}
-            right={<Boxbutton ButtonText="Goodbye" />}
-          />
-          <Childbox
-            left={<Boxbutton ButtonText="Hello Again" />}
-            right={<Boxbutton ButtonText="Goodbye Again" />}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-function App(): JSX.Element {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name={'Home'} component={Homecomp} />
-        <Tab.Screen name={'Devices'} component={Devices} />
-      </Tab.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name={'Home'} component={Home} />
+          <Tab.Screen name={'Devices'} component={Devices} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }
 
