@@ -8,13 +8,17 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
+
+import {StatusBar, StyleSheet, useColorScheme, View, Text} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 //Components added from internal
 import Devices from './Components/DeviceScreen';
 import Home from './Components/HomeScreen';
+import Production from './Components/ProductionScreen';
+import AddTask from './Components/AddTaskScreen';
+import Boxbutton, {Childbox} from './Components/Boxbutton';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,18 +28,19 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   return (
-    <View>
+    <NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name={'Home'} component={Home} />
-          <Tab.Screen name={'Devices'} component={Devices} />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </View>
+
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Devices" component={Devices} />
+        <Tab.Screen name="Production" component={Production} />
+        <Tab.Screen name="Add Task" component={AddTask} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 

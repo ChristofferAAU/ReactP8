@@ -1,24 +1,31 @@
-import {StyleSheet, View} from 'react-native';
+import 'react-native-gesture-handler';
 import React from 'react';
-import Boxbutton from './Boxbutton';
-import {Childbox} from './Boxbutton';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 
-function Home(): JSX.Element {
+const Dummy = [{id: '1', title: 'Item one'}];
+
+type Itemprops = {title: string};
+
+const ListItem = ({title}: Itemprops) => (
+  <View>
+    <Text>{title}</Text>
+  </View>
+);
+
+function AddTask(): JSX.Element {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Childbox
-        left={<Boxbutton ButtonText="Hello" />}
-        right={<Boxbutton ButtonText="Goodbye" />}
-      />
-      <Childbox
-        left={<Boxbutton ButtonText="Hello Again" />}
-        right={<Boxbutton ButtonText="Goodbye Again" />}
+    <View style={styles.containercol}>
+      <Text>Add Task Screen</Text>
+      <FlatList
+        data={Dummy}
+        renderItem={({item}) => <ListItem title={item.title} />}
+        keyExtractor={item => item.id}
       />
     </View>
   );
 }
 
-export default Home;
+export default AddTask;
 
 const styles = StyleSheet.create({
   containerrow: {

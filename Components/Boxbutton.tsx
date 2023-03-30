@@ -14,7 +14,7 @@ function Boxbutton(props: TouchableProps): JSX.Element {
     </TouchableHighlight>
   );
 }
-export function Childbox(props): JSX.Element {
+export function Childbox(props: any): JSX.Element {
   return (
     <View style={[styles.containerrow]}>
       {props.left}
