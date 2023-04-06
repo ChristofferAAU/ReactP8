@@ -13,7 +13,7 @@ type data = {id: number; title: string};
 let DummyD: data[];
 DummyD = [];
 
-type Itemprops = {item: data; index: number; seperator: object};
+//type Itemprops = {item: data; index: number; seperator: object};
 
 /*const ListItem = ({item, index, seperator}: Itemprops) => (
   <TouchableHighlight
